@@ -1,0 +1,27 @@
+[
+  {
+    "order_id": "ORD759",
+    "customer_email": "john.doe@example.com",
+    "items": [
+      {"product_id": "PROD01", "quantity": 1}
+    ],
+    "status": "Sedang Diproses"
+  },
+  {
+    "order_id": "ORD321",
+    "customer_email": "jane.smith@example.com",
+    "items": [
+      {"product_id": "PROD02", "quantity": 2},
+      {"product_id": "PROD03", "quantity": 1}
+    ],
+    "status": "Telah Dikirim"
+  },
+  {
+    "order_id": "ORD486",
+    "customer_email": "alice.williams@example.com",
+    "items": [
+      {"product_id": "PROD04", "quantity": 1}
+    ],
+    "status": "Tiba di Tujuan"
+  }
+]

@@ -24,11 +24,6 @@
       "tag": "password",
       "patterns": ["reset password", "lupa kata sandi", "ganti password", "lupa password"],
       "responses": ["Untuk mereset kata sandi Anda, silakan kunjungi halaman 'Lupa Kata Sandi' di situs web kami dan ikuti petunjuk yang diberikan."]
-    },
-    {
-      "tag": "order_status",
-      "patterns": ["status pesanan", "cek pesanan", "pesanan saya", "lacak pesanan"],
-      "responses": ["Anda dapat memeriksa status pesanan dengan memasukkan nomor pesanan Anda di halaman pelacakan di situs web kami."]
     }
   ]
 }

@@ -1,58 +1,76 @@
-# Chatbot Sederhana dengan NLP
+# Chatbot Cerdas dengan NLP
 
 ## Deskripsi
-Proyek ini adalah sebuah bot percakapan (chatbot) sederhana yang dirancang untuk memahami dan merespons pertanyaan umum dari pengguna. Chatbot ini dibangun sebagai Produk Minimum yang Layak (MVP) untuk memvalidasi konsep interaksi berbasis teks menggunakan Pemrosesan Bahasa Alami (NLP) tingkat dasar. Tujuannya adalah untuk memberikan respons yang cepat dan otomatis terhadap pertanyaan yang sering diajukan, sehingga meningkatkan efisiensi dan pengalaman pengguna.
+Proyek ini adalah sebuah chatbot cerdas yang dirancang untuk melayani permintaan pengguna secara dinamis. Berbeda dari chatbot berbasis kata kunci sederhana, program ini menggunakan teknik Pemrosesan Bahasa Alami (NLP) dasar melalui _regular expressions_ untuk mengenali maksud (intent) pengguna dan mengekstrak informasi penting (entitas) dari percakapan.
+
+Chatbot ini mampu terhubung dengan sistem data (disimulasikan melalui JSON) untuk melakukan tugas-tugas praktis seperti memeriksa status pesanan dan mencari informasi produk, serta menyertakan lapisan verifikasi untuk keamanan data.
 
 ## Fitur Utama
-- **Pemahaman Pertanyaan Dasar**: Mampu mengidentifikasi maksud dari pertanyaan pengguna berdasarkan pola kata kunci.
-- **Respons Berbasis Teks**: Memberikan jawaban yang relevan dan informatif dari basis pengetahuan yang telah ditentukan.
-- **Penanganan Salam & Perpisahan**: Dapat mengenali dan merespons sapaan umum (misalnya, "Halo", "Selamat Pagi") dan ucapan perpisahan.
-- **Basis Pengetahuan**: Menggunakan file JSON (`knowledge_base.json`) sebagai sumber jawaban untuk pertanyaan seputar:
-    - Jam operasional
-    - Cara mereset kata sandi
-    - Pengecekan status pesanan
+- **Pengenalan Maksud & Entitas:** Mampu memahami permintaan spesifik seperti "cek status pesanan ORD123" atau "info produk Laptop Pro" dan mengekstrak data relevan (ID pesanan, nama produk).
+- **Pengecekan Status Pesanan:** Memungkinkan pengguna melacak status pesanan mereka. Fitur ini diamankan dengan **verifikasi email** untuk memastikan hanya pemilik pesanan yang dapat melihat statusnya.
+- **Pencarian Informasi Produk:** Memberikan detail produk (deskripsi, harga, stok) secara dinamis berdasarkan permintaan pengguna.
+- **Manajemen Konteks Percakapan:** Mampu menangani dialog multi-langkah, seperti saat meminta email untuk proses verifikasi pesanan.
+- **Logging Percakapan:** Semua interaksi dicatat ke dalam file `chat_log.txt` untuk tujuan audit dan analisis di masa depan.
+- **Respons Fallback Cerdas:** Jika permintaan tidak dikenali, chatbot akan memberikan petunjuk tentang cara bertanya yang benar.
 
 ## Teknologi yang Digunakan
 - **Bahasa:** Python 3
-- **Kerangka Kerja/Library:** Hanya menggunakan pustaka standar Python (`json`, `random`).
-- **Database:** JSON (untuk menyimpan basis pengetahuan).
+- **Kerangka Kerja/Library:** Hanya menggunakan pustaka standar Python (`json`, `re`, `logging`). Tidak ada dependensi eksternal.
+- **Database:** File JSON (`orders.json`, `products.json`) digunakan untuk mensimulasikan database pesanan dan produk.
 
 ## Instalasi
-Tidak ada dependensi eksternal yang perlu diinstal. Anda hanya memerlukan interpreter Python 3.
+Proyek ini tidak memerlukan instalasi dependensi eksternal.
 
-1.  Clone repositori ini atau unduh file-filenya ke direktori lokal Anda.
+1.  Clone repositori ini ke mesin lokal Anda:
     ```bash
-    git clone <URL_REPOSITORI_ANDA>
-    cd <NAMA_DIREKTORI>
+    git clone <URL_REPOSITORI_PROYEK_INI>
     ```
-2.  Pastikan Anda memiliki file `chatbot.py` dan `knowledge_base.json` di direktori yang sama.
+2.  Navigasikan ke direktori proyek:
+    ```bash
+    cd <NAMA_DIREKTORI_PROYEK>
+    ```
 
 ## Penggunaan
-Untuk menjalankan chatbot, buka terminal atau command prompt, navigasikan ke direktori proyek, dan jalankan perintah berikut:
+Untuk menjalankan chatbot, jalankan skrip utama dari terminal Anda:
 ```bash
-python chatbot.py
+python3 chatbot.py
 ```
-Setelah itu, chatbot akan diinisialisasi dan Anda dapat mulai mengetik pertanyaan Anda di konsol. Untuk keluar dari program, ketik `exit`, `quit`, atau `selamat tinggal`.
+Chatbot akan diinisialisasi dan siap menerima input Anda.
 
-**Contoh Interaksi:**
+**Contoh Sesi 1: Pengecekan Status Pesanan**
 ```
-Anda: halo
-Bot: Halo! Ada yang bisa saya bantu?
-Anda: jam buka toko?
-Bot: Toko kami buka dari jam 9 pagi hingga 9 malam, setiap hari Senin sampai Jumat.
-Anda: terima kasih
-Bot: Dengan senang hati!
-Anda: sampai jumpa
-Bot: Senang bisa membantu. Selamat tinggal!
+Menginisialisasi chatbot...
+Chatbot berhasil diinisialisasi.
+
+Chatbot siap! Ketik pertanyaan Anda atau 'exit' untuk keluar.
+Anda: status pesanan ORD759
+Bot: Tentu, untuk memverifikasi, silakan masukkan alamat email yang terkait dengan pesanan ORD759.
+Anda: john.doe@example.com
+Bot: Status untuk pesanan ORD759 adalah: **Sedang Diproses**.
+```
+
+**Contoh Sesi 2: Pencarian Info Produk**
+```
+Anda: info produk Mouse Gaming
+Bot: Berikut detail untuk **Mouse Gaming**:
+- Deskripsi: Mouse dengan presisi tinggi untuk pengalaman gaming terbaik.
+- Harga: Rp 850,000
+- Stok: 150 unit
+```
+
+**Contoh Sesi 3: Pertanyaan Tidak Dikenali**
+```
+Anda: cuaca hari ini
+Bot: Maaf, saya tidak mengerti. Coba gunakan format seperti: 'status pesanan ORD123' atau 'info produk Laptop Pro'.
 ```
 
 ## Kontribusi
-Kontribusi untuk proyek ini sangat diharapkan. Jika Anda ingin berkontribusi, silakan ikuti langkah-langkah berikut:
-1.  Fork repositori ini.
-2.  Buat branch baru untuk fitur Anda (`git checkout -b fitur/NamaFitur`).
-3.  Commit perubahan Anda (`git commit -m 'Menambahkan Fitur X'`).
-4.  Push ke branch Anda (`git push origin fitur/NamaFitur`).
-5.  Buka Pull Request.
+Kami menyambut baik kontribusi dari siapa saja. Jika Anda ingin berkontribusi, silakan ikuti langkah-langkah berikut:
+1.  **Fork** repositori ini.
+2.  Buat **branch** baru untuk fitur Anda (`git checkout -b fitur/NamaFiturAnda`).
+3.  **Commit** perubahan Anda (`git commit -m 'Menambahkan fitur X'`).
+4.  **Push** ke branch Anda (`git push origin fitur/NamaFiturAnda`).
+5.  Buka **Pull Request**.
 
 ## Lisensi
-Proyek ini dilisensikan di bawah Lisensi MIT.
+Proyek ini dilisensikan di bawah **Lisensi MIT**. Lihat file `LICENSE` untuk detail lebih lanjut.
