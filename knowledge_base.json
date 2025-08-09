@@ -1,0 +1,34 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": ["halo", "selamat pagi", "selamat siang", "hai", "pagi"],
+      "responses": ["Halo! Ada yang bisa saya bantu?", "Hai, selamat datang. Apa yang bisa saya bantu untuk Anda hari ini?"]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": ["selamat tinggal", "sampai jumpa", "exit", "quit"],
+      "responses": ["Sampai jumpa lagi!", "Senang bisa membantu. Selamat tinggal!"]
+    },
+    {
+      "tag": "thanks",
+      "patterns": ["terima kasih", "makasih", "terimakasih"],
+      "responses": ["Sama-sama!", "Dengan senang hati!"]
+    },
+    {
+      "tag": "hours",
+      "patterns": ["jam buka", "jam operasional", "toko buka", "buka jam berapa"],
+      "responses": ["Toko kami buka dari jam 9 pagi hingga 9 malam, setiap hari Senin sampai Jumat."]
+    },
+    {
+      "tag": "password",
+      "patterns": ["reset password", "lupa kata sandi", "ganti password", "lupa password"],
+      "responses": ["Untuk mereset kata sandi Anda, silakan kunjungi halaman 'Lupa Kata Sandi' di situs web kami dan ikuti petunjuk yang diberikan."]
+    },
+    {
+      "tag": "order_status",
+      "patterns": ["status pesanan", "cek pesanan", "pesanan saya", "lacak pesanan"],
+      "responses": ["Anda dapat memeriksa status pesanan dengan memasukkan nomor pesanan Anda di halaman pelacakan di situs web kami."]
+    }
+  ]
+}
