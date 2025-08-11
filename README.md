@@ -1,28 +1,25 @@
-# Proyek Chatbot Asisten Virtual
+# Proyek Chatbot FAQ Sederhana
 
 ## Deskripsi
-Proyek ini adalah implementasi dari asisten percakapan berbasis teks (chatbot) yang dirancang untuk membantu pengguna menemukan jawaban cepat atas pertanyaan umum (FAQ) dan melakukan tugas-tugas sederhana seperti melacak status pesanan atau mencari informasi produk. Chatbot ini dibangun dengan antarmuka web yang bersih dan responsif, serta didukung oleh backend Python yang ringan.
-
-Tujuan utamanya adalah menyediakan solusi yang efisien untuk mengurangi beban tim layanan pelanggan dengan mengotomatiskan jawaban atas pertanyaan yang sering diajukan, sekaligus memberikan pengalaman pengguna yang mulus dan cepat.
+Proyek ini adalah sebuah chatbot berbasis teks yang dirancang untuk memberikan jawaban cepat dan akurat terhadap pertanyaan umum (Frequently Asked Questions). Chatbot ini dibangun sebagai Produk Minimum yang Layak (MVP) sesuai dengan dokumen PRD-MVP-5, dengan fokus pada penyediaan informasi yang telah dikurasi tanpa memerlukan personalisasi atau riwayat percakapan lintas sesi. Tujuannya adalah untuk memberikan fondasi yang kuat bagi pengembangan fitur chatbot yang lebih canggih di masa depan.
 
 ## Fitur Utama
-- **Tanya Jawab Umum (FAQ):** Menjawab berbagai pertanyaan umum berdasarkan basis pengetahuan (knowledge base) yang mudah diperbarui.
-- **Pelacakan Status Pesanan:** Memungkinkan pengguna untuk memeriksa status pesanan mereka dengan aman melalui verifikasi email.
-- **Pencarian Informasi Produk:** Memberikan detail produk, termasuk deskripsi, harga, dan jumlah stok.
-- **Antarmuka Web Responsif:** Antarmuka chat yang bersih dan dapat diakses dengan baik di perangkat desktop maupun mobile.
-- **Manajemen Konten Eksternal:** Seluruh data (FAQ, produk, pesanan) disimpan dalam format JSON, sehingga pembaruan konten tidak memerlukan perubahan kode.
-- **Pencatatan Percakapan:** Menyimpan riwayat percakapan ke dalam file log untuk tujuan analisis dan peningkatan kualitas.
+- **Antarmuka Percakapan Teks:** Pengguna dapat berinteraksi dengan chatbot melalui antarmuka web yang sederhana dan responsif.
+- **Basis Pengetahuan FAQ:** Menjawab lebih dari 20 pertanyaan umum yang telah ditentukan, mencakup topik seperti informasi perusahaan, layanan, kebijakan, dan dukungan teknis.
+- **Penanganan Percakapan Dasar:** Mampu merespons sapaan (salam), ucapan terima kasih, dan permintaan bantuan.
+- **Fallback Cerdas:** Memberikan respons yang sopan dan membantu ketika pertanyaan pengguna tidak dikenali, serta menyarankan untuk menghubungi dukungan jika diperlukan.
+- **Pencatatan (Logging):** Mencatat kategori (tag) dari setiap pertanyaan yang berhasil dikenali untuk analisis konten di masa depan. Interaksi yang tidak dikenali juga dicatat untuk perbaikan.
+- **Stateless:** Setiap pertanyaan diproses secara independen tanpa menyimpan riwayat percakapan, sesuai dengan prinsip privasi dan kesederhanaan MVP.
 
 ## Teknologi yang Digunakan
-- **Bahasa:** Python
+- **Bahasa:** Python 3
 - **Kerangka Kerja/Library:**
-  - **Flask:** Sebagai kerangka kerja web untuk membangun server dan API.
-  - **Standard Libraries:** `json` (untuk memproses data), `re` (untuk pencocokan pola), `logging` (untuk mencatat riwayat).
-- **Frontend:** HTML5, CSS3 (dengan Flexbox), JavaScript (dengan Fetch API).
-- **Data:** File JSON sebagai basis data sederhana.
+  - **Flask:** Sebagai kerangka kerja web untuk menyediakan antarmuka API dan web.
+  - **Standard Libraries:** `json` (untuk mengelola basis pengetahuan), `re` (untuk pencocokan pola), `logging` (untuk pencatatan).
+- **Frontend:** HTML5, CSS3, JavaScript (untuk antarmuka chat).
 
 ## Instalasi
-Untuk menjalankan proyek ini di lingkungan lokal Anda, ikuti langkah-langkah berikut:
+Untuk menjalankan proyek ini di lingkungan lokal, ikuti langkah-langkah berikut:
 
 1.  **Clone Repositori:**
     ```bash
@@ -32,47 +29,33 @@ Untuk menjalankan proyek ini di lingkungan lokal Anda, ikuti langkah-langkah ber
 
 2.  **Buat dan Aktifkan Virtual Environment (Direkomendasikan):**
     ```bash
-    python -m venv venv
-    # Windows
-    venv\\Scripts\\activate
-    # macOS / Linux
-    source venv/bin/activate
+    python3 -m venv venv
+    source venv/bin/activate  # Di Windows, gunakan `venv\Scripts\activate`
     ```
 
-3.  **Instal Dependensi:**
-    Proyek ini hanya memerlukan Flask. Instal dari file `requirements.txt` (jika ada) atau langsung menggunakan pip.
+3.  **Instal Ketergantungan (Dependencies):**
+    Proyek ini menggunakan Flask. Instal dengan pip:
     ```bash
     pip install Flask
     ```
 
 ## Penggunaan
-Setelah instalasi selesai, Anda dapat menjalankan aplikasi dengan perintah berikut:
+Setelah instalasi selesai, Anda dapat menjalankan aplikasi chatbot dengan perintah berikut dari direktori utama proyek:
 
-1.  **Jalankan Server Flask:**
-    ```bash
-    python app.py
-    ```
+```bash
+python3 app.py
+```
+Aplikasi akan berjalan di `http://127.0.0.1:5001`. Buka alamat ini di browser Anda untuk mulai berinteraksi dengan chatbot.
 
-2.  **Akses Aplikasi:**
-    Buka browser web Anda dan navigasikan ke alamat berikut:
-    ```
-    http://127.0.0.1:5001
-    ```
-
-3.  **Contoh Interaksi:**
-    Anda dapat mulai berinteraksi dengan chatbot. Coba beberapa perintah berikut:
-    - `halo`
-    - `jam operasional`
-    - `info produk Laptop Pro`
-    - `cek pesanan ORD759` (kemudian masukkan email `john.doe@example.com` saat diminta)
+Log interaksi akan disimpan dalam file `chat_log.log` di direktori utama.
 
 ## Kontribusi
-Kami menyambut baik kontribusi dari siapa pun. Jika Anda ingin berkontribusi, silakan ikuti pedoman berikut:
+Kami menyambut baik kontribusi dari siapa saja. Jika Anda ingin berkontribusi, silakan ikuti pedoman berikut:
 1.  **Fork** repositori ini.
-2.  Buat **branch** baru untuk fitur atau perbaikan Anda (`git checkout -b fitur/nama-fitur`).
+2.  Buat **branch** baru untuk fitur atau perbaikan Anda (`git checkout -b nama-fitur-anda`).
 3.  **Commit** perubahan Anda (`git commit -m 'Menambahkan fitur X'`).
-4.  **Push** ke branch Anda (`git push origin fitur/nama-fitur`).
+4.  **Push** ke branch Anda (`git push origin nama-fitur-anda`).
 5.  Buka **Pull Request**.
 
 ## Lisensi
-Proyek ini dilisensikan di bawah **Lisensi MIT**.
+Proyek ini dilisensikan di bawah Lisensi MIT.

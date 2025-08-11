@@ -2,28 +2,114 @@
   "intents": [
     {
       "tag": "greeting",
-      "patterns": ["halo", "selamat pagi", "selamat siang", "hai", "pagi"],
-      "responses": ["Halo! Ada yang bisa saya bantu?", "Hai, selamat datang. Apa yang bisa saya bantu untuk Anda hari ini?"]
+      "patterns": ["halo", "selamat pagi", "siang", "hai", "pagi", "permisi"],
+      "responses": ["Halo! Ada yang bisa saya bantu?", "Hai, selamat datang! Apa yang ingin Anda ketahui hari ini?"]
     },
     {
       "tag": "goodbye",
-      "patterns": ["selamat tinggal", "sampai jumpa", "exit", "quit"],
-      "responses": ["Sampai jumpa lagi!", "Senang bisa membantu. Selamat tinggal!"]
+      "patterns": ["selamat tinggal", "sampai jumpa", "exit", "quit", "keluar", "terima kasih cukup"],
+      "responses": ["Sampai jumpa lagi!", "Senang bisa membantu. Selamat tinggal!", "Baik, saya akan siap jika Anda butuh bantuan lagi."]
     },
     {
       "tag": "thanks",
-      "patterns": ["terima kasih", "makasih", "terimakasih"],
-      "responses": ["Sama-sama!", "Dengan senang hati!"]
+      "patterns": ["terima kasih", "makasih", "terimakasih", "thanks"],
+      "responses": ["Sama-sama!", "Dengan senang hati!", "Tentu, senang bisa membantu."]
     },
     {
-      "tag": "hours",
-      "patterns": ["jam buka", "jam operasional", "toko buka", "buka jam berapa"],
-      "responses": ["Toko kami buka dari jam 9 pagi hingga 9 malam, setiap hari Senin sampai Jumat."]
+      "tag": "help",
+      "patterns": ["bantuan", "help", "apa yang bisa kamu lakukan", "bisa bantu apa"],
+      "responses": ["Saya bisa menjawab pertanyaan umum seputar layanan kami. Anda bisa bertanya tentang topik seperti: \n- Informasi umum perusahaan\n- Cara pendaftaran\n- Kebijakan pengembalian\n- Lokasi kantor kami\n- Dan lain-lain."]
     },
     {
-      "tag": "password",
-      "patterns": ["reset password", "lupa kata sandi", "ganti password", "lupa password"],
-      "responses": ["Untuk mereset kata sandi Anda, silakan kunjungi halaman 'Lupa Kata Sandi' di situs web kami dan ikuti petunjuk yang diberikan."]
+      "tag": "about_company",
+      "patterns": ["tentang perusahaan", "siapa anda", "ini perusahaan apa"],
+      "responses": ["Kami adalah perusahaan fiktif bernama 'Solusi Digital Nusantara', yang berfokus pada penyediaan solusi teknologi inovatif untuk bisnis di seluruh Indonesia."]
+    },
+    {
+      "tag": "contact",
+      "patterns": ["kontak", "nomor telepon", "hubungi siapa", "email support"],
+      "responses": ["Anda dapat menghubungi tim dukungan kami melalui email di support@sdn.co.id atau melalui telepon di (021) 555-0123 pada jam kerja."]
+    },
+    {
+      "tag": "office_location",
+      "patterns": ["lokasi", "alamat kantor", "di mana kantornya"],
+      "responses": ["Kantor pusat kami berlokasi di Jl. Jenderal Sudirman Kav. 52-53, Jakarta Selatan, Indonesia."]
+    },
+    {
+      "tag": "working_hours",
+      "patterns": ["jam kerja", "jam operasional", "kantor buka"],
+      "responses": ["Jam kerja kantor kami adalah Senin hingga Jumat, dari pukul 09:00 hingga 17:00 WIB."]
+    },
+    {
+      "tag": "registration",
+      "patterns": ["cara daftar", "buat akun", "registrasi", "mendaftar"],
+      "responses": ["Untuk mendaftar, silakan kunjungi situs web kami di www.sdn.co.id, klik tombol 'Daftar', dan isi formulir yang tersedia. Prosesnya cepat dan mudah!"]
+    },
+    {
+      "tag": "forgot_password",
+      "patterns": ["lupa password", "reset kata sandi", "lupa kata sandi"],
+      "responses": ["Jika Anda lupa kata sandi, buka halaman login dan klik tautan 'Lupa Kata Sandi'. Anda akan diminta memasukkan email terdaftar untuk menerima instruksi reset."]
+    },
+    {
+      "tag": "services",
+      "patterns": ["layanan", "jasa apa saja", "produk yang ditawarkan"],
+      "responses": ["Kami menawarkan berbagai layanan, termasuk pengembangan perangkat lunak kustom, konsultasi IT, dan manajemen infrastruktur cloud. Info lebih lengkap ada di situs web kami."]
+    },
+    {
+      "tag": "pricing",
+      "patterns": ["harga", "biaya layanan", "berapa harganya"],
+      "responses": ["Harga layanan kami bervariasi tergantung pada kebutuhan proyek Anda. Untuk mendapatkan penawaran harga, silakan hubungi tim penjualan kami melalui sales@sdn.co.id."]
+    },
+    {
+      "tag": "payment_methods",
+      "patterns": ["cara bayar", "metode pembayaran", "bayar lewat apa"],
+      "responses": ["Kami menerima pembayaran melalui transfer bank (BCA, Mandiri), kartu kredit (Visa, MasterCard), dan dompet digital (GoPay, OVO)."]
+    },
+    {
+      "tag": "return_policy",
+      "patterns": ["kebijakan pengembalian", "refund", "bisa refund", "pengembalian dana"],
+      "responses": ["Kami menawarkan kebijakan pengembalian dana penuh dalam 14 hari pertama untuk layanan berlangganan. Untuk proyek kustom, ketentuan diatur dalam kontrak."]
+    },
+    {
+      "tag": "cancellation",
+      "patterns": ["cara membatalkan", "pembatalan", "berhenti langganan"],
+      "responses": ["Anda dapat membatalkan langganan kapan saja melalui dasbor akun Anda di situs web kami. Pembatalan akan berlaku efektif pada akhir siklus penagihan saat ini."]
+    },
+    {
+      "tag": "privacy_policy",
+      "patterns": ["kebijakan privasi", "data saya aman", "privasi"],
+      "responses": ["Kami sangat menjaga privasi data Anda. Informasi lengkap mengenai bagaimana kami mengelola data dapat dibaca di halaman Kebijakan Privasi di situs kami."]
+    },
+    {
+      "tag": "careers",
+      "patterns": ["karir", "lowongan kerja", "bekerja di sini", "loker"],
+      "responses": ["Kami selalu mencari talenta berbakat! Silakan kunjungi halaman karir di situs web kami untuk melihat daftar lowongan yang tersedia saat ini."]
+    },
+    {
+      "tag": "documentation",
+      "patterns": ["dokumentasi", "panduan teknis", "API docs"],
+      "responses": ["Dokumentasi teknis lengkap untuk semua layanan dan API kami tersedia di docs.sdn.co.id."]
+    },
+    {
+      "tag": "demo",
+      "patterns": ["minta demo", "jadwal demo", "lihat demo produk"],
+      "responses": ["Tentu! Anda dapat menjadwalkan sesi demo gratis dengan tim kami dengan mengisi formulir permintaan demo di situs web kami."]
+    },
+    {
+      "tag": "partnership",
+      "patterns": ["kemitraan", "partner", "kerja sama bisnis"],
+      "responses": ["Kami terbuka untuk peluang kemitraan. Silakan kirimkan proposal Anda ke email partnership@sdn.co.id dan tim kami akan meninjaunya."]
+    },
+    {
+      "tag": "complaint",
+      "patterns": ["keluhan", "komplain", "layanan buruk"],
+      "responses": ["Kami mohon maaf atas ketidaknyamanannya. Mohon sampaikan keluhan Anda secara detail ke email support@sdn.co.id agar kami dapat segera menindaklanjutinya."]
     }
+  ],
+  "fallback_responses": [
+    "Maaf, saya kurang mengerti pertanyaan Anda. Bisakah Anda menjelaskannya dengan cara lain?",
+    "Maaf, saya belum bisa menjawab pertanyaan itu. Mungkin Anda bisa mencoba bertanya tentang topik lain seperti layanan, harga, atau kontak.",
+    "Saya masih dalam tahap belajar dan belum memahami pertanyaan tersebut. Silakan coba gunakan kata kunci yang lebih umum.",
+    "Untuk pertanyaan yang lebih spesifik, Anda bisa menghubungi tim dukungan kami melalui email di support@sdn.co.id."
   ]
 }
