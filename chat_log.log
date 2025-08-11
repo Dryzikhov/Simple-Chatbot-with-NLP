@@ -1,0 +1,16 @@
+2025-08-11 11:13:38,211 - INFO - Aplikasi chatbot berhasil diinisialisasi.
+2025-08-11 11:13:38,213 - INFO - Input pengguna 'SAYA MAU TANYA LOKASI KANTOR' cocok dengan kategori: office_location
+2025-08-11 11:13:38,214 - INFO - Input pengguna 'Berapa harga secangkir kopi di Mars?' cocok dengan kategori: pricing
+2025-08-11 11:13:38,215 - INFO - Input pengguna 'Halo, selamat pagi!' cocok dengan kategori: greeting
+2025-08-11 11:13:38,216 - INFO - Input pengguna 'apa saja yang bisa kamu lakukan?' tidak dikenali (fallback).
+2025-08-11 11:13:38,217 - INFO - Input pengguna 'Boleh saya tahu di mana lokasi kantor pusat?' cocok dengan kategori: office_location
+2025-08-11 11:13:38,217 - INFO - Input pengguna 'Saya butuh konsentrasi penuh.' tidak dikenali (fallback).
+2025-08-11 11:13:38,217 - INFO - Input pengguna 'Di mana alamat kantor Anda?' cocok dengan kategori: office_location
+2025-08-11 11:14:22,617 - INFO - Aplikasi chatbot berhasil diinisialisasi.
+2025-08-11 11:14:22,619 - INFO - Input 'SAYA MAU TANYA LOKASI KANTOR' cocok dengan kategori: office_location
+2025-08-11 11:14:22,621 - INFO - Input 'Apakah cuaca cerah hari ini di Pluto?' tidak dikenali (fallback).
+2025-08-11 11:14:22,621 - INFO - Input 'Halo, selamat pagi!' cocok dengan kategori: greeting
+2025-08-11 11:14:22,622 - INFO - Input 'apa saja yang bisa kamu lakukan?' cocok dengan kategori: help
+2025-08-11 11:14:22,622 - INFO - Input 'Boleh saya tahu di mana lokasi kantor pusat?' cocok dengan kategori: office_location
+2025-08-11 11:14:22,623 - INFO - Input 'Saya butuh konsentrasi penuh.' tidak dikenali (fallback).
+2025-08-11 11:14:22,623 - INFO - Input 'Di mana alamat kantor Anda?' cocok dengan kategori: office_location

@@ -1,81 +1,80 @@
 import unittest
 import json
-from chatbot import (
-    load_json_data,
-    get_intent_and_entities,
-    handle_order_status,
-    handle_product_info,
-    get_fallback_response
-)
+from chatbot import initialize_application, get_faq_response
 
-class TestChatbotFeatures(unittest.TestCase):
+class TestFaqChatbot(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        """Memuat semua data yang diperlukan sekali untuk semua tes."""
-        cls.knowledge_base = load_json_data('knowledge_base.json')
-        cls.orders = load_json_data('orders.json')
-        cls.products = load_json_data('products.json')
+        """
+        Memuat knowledge base sekali untuk semua tes.
+        Ini memastikan bahwa data pengujian konsisten dan efisien.
+        """
+        print("Menyiapkan data untuk pengujian...")
+        cls.knowledge_base = initialize_application()
+        if cls.knowledge_base is None:
+            raise ValueError("Gagal memuat knowledge_base.json untuk pengujian.")
 
-        if not all([cls.knowledge_base, cls.orders, cls.products]):
-            raise ValueError("Gagal memuat satu atau lebih file data untuk pengujian.")
+        # Ekstrak beberapa data untuk pengujian yang lebih mudah dibaca
+        cls.greeting_responses = next(i['responses'] for i in cls.knowledge_base['intents'] if i['tag'] == 'greeting')
+        cls.location_responses = next(i['responses'] for i in cls.knowledge_base['intents'] if i['tag'] == 'office_location')
+        cls.fallback_responses = cls.knowledge_base['fallback_responses']
 
-    def test_get_intent_and_entities(self):
-        """Menguji pengenalan maksud (intent) dan ekstraksi entitas."""
-        test_cases = {
-            "status pesanan ORD759": ("check_order", {'order_id': 'ORD759'}),
-            "lacak order ORD321": ("check_order", {'order_id': 'ORD321'}),
-            "info produk Laptop Pro": ("find_product", {'product_name': 'laptop pro'}),
-            "detail barang Mouse Gaming": ("find_product", {'product_name': 'mouse gaming'}),
-            "halo, apa kabar?": (None, {}),
-            "terima kasih banyak": (None, {})
-        }
+    def test_initialization(self):
+        """Memastikan knowledge base berhasil dimuat dan tidak kosong."""
+        self.assertIsNotNone(self.knowledge_base)
+        self.assertIn("intents", self.knowledge_base)
+        self.assertIn("fallback_responses", self.knowledge_base)
+        self.assertTrue(len(self.knowledge_base["intents"]) > 10) # Memastikan FAQ sudah banyak
 
-        for text, (expected_intent, expected_entities) in test_cases.items():
-            with self.subTest(text=text):
-                intent, entities = get_intent_and_entities(text)
-                self.assertEqual(intent, expected_intent)
-                self.assertEqual(entities, expected_entities)
+    def test_greeting_intent(self):
+        """Menguji apakah input sapaan dikenali dengan benar."""
+        user_input = "Halo, selamat pagi!"
+        response = get_faq_response(user_input, self.knowledge_base)
+        self.assertIn(response, self.greeting_responses)
 
-    def test_handle_order_status(self):
-        """Menguji logika penanganan status pesanan."""
-        # Kasus sukses
-        response = handle_order_status("ORD759", "john.doe@example.com", self.orders)
-        self.assertIn("Status untuk pesanan ORD759 adalah: **Sedang Diproses**.", response)
+    def test_specific_faq_intent(self):
+        """Menguji pertanyaan FAQ spesifik (misalnya, lokasi)."""
+        user_input = "Di mana alamat kantor Anda?"
+        response = get_faq_response(user_input, self.knowledge_base)
+        self.assertIn(response, self.location_responses)
 
-        # Kasus verifikasi gagal
-        response = handle_order_status("ORD321", "wrong.email@example.com", self.orders)
-        self.assertIn("Verifikasi gagal.", response)
+    def test_case_insensitivity(self):
+        """Menguji apakah pencocokan tidak sensitif terhadap huruf besar/kecil."""
+        user_input = "SAYA MAU TANYA LOKASI KANTOR"
+        response = get_faq_response(user_input, self.knowledge_base)
+        self.assertIn(response, self.location_responses)
 
-        # Kasus pesanan tidak ditemukan
-        response = handle_order_status("ORD999", "any@email.com", self.orders)
-        self.assertIn("tidak ditemukan", response)
+    def test_keyword_in_sentence(self):
+        """Menguji apakah kata kunci dikenali meskipun berada di tengah kalimat."""
+        user_input = "Boleh saya tahu di mana lokasi kantor pusat?"
+        response = get_faq_response(user_input, self.knowledge_base)
+        self.assertIn(response, self.location_responses)
 
-    def test_handle_product_info(self):
-        """Menguji logika penanganan informasi produk."""
-        # Kasus sukses
-        response = handle_product_info("Laptop Pro", self.products)
-        self.assertIn("Berikut detail untuk **Laptop Pro**", response)
-        self.assertIn("Harga: Rp 21,500,000", response)
-        self.assertIn("Stok: 35 unit", response)
+    def test_fallback_response(self):
+        """Menguji apakah respons fallback diberikan untuk input yang tidak dikenali."""
+        # Input ini sengaja dibuat agar tidak mengandung kata kunci dari intent manapun
+        user_input = "Apakah cuaca cerah hari ini di Pluto?"
+        response = get_faq_response(user_input, self.knowledge_base)
+        self.assertIn(response, self.fallback_responses)
 
-        # Kasus produk tidak ditemukan
-        response = handle_product_info("Produk Impian", self.products)
-        self.assertIn("tidak ditemukan", response)
+    def test_partial_match_avoidance(self):
+        """
+        Menguji bahwa pola tidak cocok dengan bagian dari kata lain.
+        Misalnya, 'harga' tidak boleh cocok dengan 'berharga'.
+        """
+        # "registrasi" ada di knowledge base, tapi "konsentrasi" seharusnya tidak memicunya.
+        user_input = "Saya butuh konsentrasi penuh."
+        response = get_faq_response(user_input, self.knowledge_base)
+        self.assertIn(response, self.fallback_responses)
 
-        # Kasus sensitivitas huruf (case-insensitivity)
-        response_lower = handle_product_info("keyboard mekanikal", self.products)
-        self.assertIn("Berikut detail untuk **Keyboard Mekanikal**", response_lower)
-
-    def test_get_fallback_response(self):
-        """Menguji respons fallback untuk pertanyaan umum."""
-        # Kasus sapaan
-        response = get_fallback_response("halo", self.knowledge_base)
-        self.assertIn(response, self.knowledge_base['intents'][0]['responses'])
-
-        # Kasus tidak dikenal
-        response = get_fallback_response("apakah pizza itu enak?", self.knowledge_base)
-        self.assertIn("Maaf, saya tidak mengerti.", response)
+    def test_help_intent(self):
+        """Menguji intent 'help' untuk memberikan panduan kepada pengguna."""
+        user_input = "apa saja yang bisa kamu lakukan?"
+        help_responses = next(i['responses'] for i in self.knowledge_base['intents'] if i['tag'] == 'help')
+        response = get_faq_response(user_input, self.knowledge_base)
+        self.assertIn(response, help_responses)
 
 if __name__ == '__main__':
+    # Menjalankan tes dengan output yang lebih detail (verbosity=2)
     unittest.main(verbosity=2)
